@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لعبة محمد أيمن</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .start-screen {
+            text-align: center;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            color: #666;
+        }
+        .environment-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+        .environment-button {
+            width: 30%;
+            height: 100px;
+            background-size: cover;
+            background-position: center;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .environment-button:hover {
+            transform: scale(1.05);
+        }
+        #start-game {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="start-screen">
+        <h1>مرحباً بك في لعبة محمد أيمن</h1>
+        <p>اختر الشخصية والبيئة</p>
+        <div class="environment-buttons">
+            <button id="desert" class="environment-button" style="background-image: url('https://i.ibb.co/72j8825/desert.png')"></button>
+            <button id="ocean" class="environment-button" style="background-image: url('https://i.ibb.co/5h2wJrh/ocean.png')"></button>
+            <button id="jungle" class="environment-button" style="background-image: url('https://i.ibb.co/JjYGXc2/jungle.png')"></button>
+        </div>
+        <button id="start-game" disabled>بدء اللعبة</button>
+    </div>
+    <script>
+        let selectedEnvironment = '';
+        const environmentButtons = document.querySelectorAll('.environment-button');
+        const startButton = document.getElementById('start-game');
+
+        environmentButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                selectedEnvironment = button.id;
+                environmentButtons.forEach(btn => btn.style.opacity = '0.5');
+                button.style.opacity = '1';
+                startButton.disabled = false;
+            });
+        });
+
+        startButton.addEventListener('click', () => {
+            if (selectedEnvironment) {
+                window.location.href = `game.html?environment=${selectedEnvironment}`;
+            }
+        });
+    </script>
+</body>
+</html>
